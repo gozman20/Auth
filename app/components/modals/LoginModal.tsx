@@ -1,30 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import { useCallback, useState } from "react";
+import { toast } from "react-hot-toast";
+import { signIn } from "next-auth/react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
+import Modal from "./Modal";
 import Input from "../inputs/Input";
 import Heading from "../Heading";
-import Modal from "./Modal";
-import { FcGoogle } from "react-icons/fc";
-import { AiFillGithub } from "react-icons/ai";
-import LoginToggler from "@/app/hooks/useLogin";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import Button from "../Button";
-import RegisterToggler from "../../hooks/useRegister";
-import { signIn } from "next-auth/react";
-import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
 
 const LoginModal = () => {
   const router = useRouter();
-  const { openLogin, closeLogin, isOpenLogin } = LoginToggler();
-  const { openRegister, closeRegister, isOpenRegister } = RegisterToggler();
+  const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
-
-  const onToggle = () => {
-    if (isOpenLogin) {
-      closeLogin();
-      openRegister();
-    }
-  };
 
   const {
     register,
@@ -39,7 +29,7 @@ const LoginModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-    console.log("Hello world");
+
     signIn("credentials", {
       ...data,
       redirect: false,
@@ -49,7 +39,7 @@ const LoginModal = () => {
       if (callback?.ok) {
         toast.success("Logged in");
         router.refresh();
-        closeLogin();
+        loginModal.onClose();
       }
 
       if (callback?.error) {
@@ -58,9 +48,14 @@ const LoginModal = () => {
     });
   };
 
+  const onToggle = useCallback(() => {
+    loginModal.onClose();
+    registerModal.onOpen();
+  }, [loginModal, registerModal]);
+
   const bodyContent = (
     <div className="flex flex-col gap-2">
-      <Heading title="Welcome back!" subtitle="Please enter your details!" />
+      <Heading title="Welcome back" subtitle="Login to your account!" />
       <Input
         id="email"
         label="Email"
@@ -69,7 +64,6 @@ const LoginModal = () => {
         errors={errors}
         required
       />
-
       <Input
         id="password"
         label="Password"
@@ -83,30 +77,15 @@ const LoginModal = () => {
   );
 
   const footerContent = (
-    <div className="flex flex-col gap-2 mt-3">
+    <div className="flex flex-col gap-2 mt-2">
       <hr />
-      <Button
-        outline
-        label="Continue with Google"
-        icon={FcGoogle}
-        onClick={() => {}}
-      />
-      <Button
-        outline
-        label="Continue with Github"
-        icon={AiFillGithub}
-        onClick={() => signIn("github")}
-      />
+
       <div
         className="
-          text-neutral-500 
-          text-center 
-          mt-1 
-          font-light
-        "
+      text-neutral-500 text-center mt-1 font-light"
       >
         <p>
-          Already have an account?
+          First time using Hotel?
           <span
             onClick={onToggle}
             className="
@@ -116,24 +95,24 @@ const LoginModal = () => {
             "
           >
             {" "}
-            Register
+            Create an account
           </span>
         </p>
       </div>
     </div>
   );
+
   return (
-    <>
-      <Modal
-        title="Login"
-        body={bodyContent}
-        actionLabel="Continue"
-        onClose={closeLogin}
-        isOpen={isOpenLogin}
-        footer={footerContent}
-        onSubmit={handleSubmit(onSubmit)}
-      />
-    </>
+    <Modal
+      disabled={isLoading}
+      isOpen={loginModal.isOpen}
+      title="Login"
+      actionLabel="Continue"
+      onClose={loginModal.onClose}
+      onSubmit={handleSubmit(onSubmit)}
+      body={bodyContent}
+      footer={footerContent}
+    />
   );
 };
 

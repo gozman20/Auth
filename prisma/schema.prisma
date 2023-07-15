@@ -14,60 +14,59 @@ datasource db {
 model User {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
   name            String?
-  email           String?   @unique
-  emailVerified   DateTime?
+  email           String   @unique
   image           String?
   hashedPassword  String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   favoriteIds     String[] @db.ObjectId
-  accounts Account[]
-  listings Listing[]
+  // accounts Account[]
+  // rooms Rooms[]
   reservations Reservation[]
 }
 
-model Account {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  userId             String   @db.ObjectId
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.String
-  access_token       String?  @db.String
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.String
-  session_state      String?
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  @@unique([provider, providerAccountId])
-}
+// model Account {
+//   id String @id @default(auto()) @map("_id") @db.ObjectId
+//   userId             String   @db.ObjectId
+//   type               String
+//   provider           String
+//   providerAccountId  String
+//   refresh_token      String?  @db.String
+//   access_token       String?  @db.String
+//   expires_at         Int?
+//   token_type         String?
+//   scope              String?
+//   id_token           String?  @db.String
+//   session_state      String?
+//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   @@unique([provider, providerAccountId])
+// }
 
-model Listing {
+model Rooms {
   id             String @id @default(auto()) @map("_id") @db.ObjectId
   title String
   description String
-  imageSrc String
-  createdAt DateTime @default(now())
-  category  String
-  roomCount Int
-  bathroomCount Int
+  image String
   guestCount Int
-  locationValue String
-  userId String @db.ObjectId
+  bathroomCount Int
   price Int
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // adminId String @db.ObjectId 
+  createdAt DateTime @default(now())
+  // user User @relation(fields: [adminId], references: [id], onDelete: Cascade)
   reservations Reservation[]
 }
 
 model Reservation {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @db.ObjectId
-  listingId String @db.ObjectId  
+  loggedinuserId String @db.ObjectId //this field was added to create reltnshp
+  roomId String @db.ObjectId //this field was added to create reltnshp
+  name String
+  phone String
+  email String? 
   startDate DateTime
   endDate DateTime
   totalPrice Int
   createdAt DateTime @default(now())
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [loggedinuserId], references: [id], onDelete: Cascade)
+  room Rooms @relation(fields: [roomId], references: [id], onDelete: Cascade)
 }
