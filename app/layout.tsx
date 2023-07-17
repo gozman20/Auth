@@ -6,6 +6,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import ToastProvider from "./toastProvider/ToastProvider";
 import AdminModal from "./components/modals/AdminModal";
+import ReservationModal from "./components/modals/ReservationModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default async function RootLayout({
         <RegisterModal />
         <LoginModal />
         <AdminModal />
+
         <ToastProvider />
         {children}
       </body>

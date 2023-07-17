@@ -93,7 +93,7 @@ const Modal: React.FC<ModalProps> = ({
           xl:w-2/5
           my-6
           mx-auto 
-          
+          h-full 
           lg:h-auto
           md:h-auto
           "
@@ -103,15 +103,15 @@ const Modal: React.FC<ModalProps> = ({
             className={`
             translate
             duration-300
-            
-            ${showModal ? "translate-x-10" : "translate-x-full"}
+            h-full
+            ${showModal ? "translate-y-0" : "translate-y-full"}
             ${showModal ? "opacity-100" : "opacity-0"}
           `}
           >
             <div
               className="
               translate
-              
+              h-full
               lg:h-auto
               md:h-auto
               border-0 
@@ -131,7 +131,7 @@ const Modal: React.FC<ModalProps> = ({
                 className="
                 flex 
                 items-center 
-                p-3
+                p-6
                 rounded-t
                 justify-center
                 relative
@@ -154,9 +154,9 @@ const Modal: React.FC<ModalProps> = ({
                 <div className="text-lg font-semibold">{title}</div>
               </div>
               {/*body*/}
-              <div className="relative p-3 flex-auto">{body}</div>
+              <div className="relative p-6 flex-auto">{body}</div>
               {/*footer*/}
-              <div className="flex flex-col gap-2 p-3">
+              <div className="flex flex-col gap-2 p-6">
                 <div
                   className="
                     flex 

@@ -1,17 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "../styles";
 import Image from "next/image";
-import ReservationForm from "../ReservationForm";
-import CalendarHead from "../inputs/calendar/CalendarHead";
 import { Range, RangeFocus } from "react-date-range";
-import Heading from "../Heading";
+import { differenceInCalendarDays, differenceInDays } from "date-fns";
+import RoomReservation from "./RoomReservation";
+import useDateRange from "@/app/hooks/useDateRange";
+import ReservationModal from "../modals/ReservationModal";
 
 interface RoomDetailProps {
+  id: string;
+  title: string;
   image: string;
-  guestCount: string;
-  price: string;
-  bathroomCount: string;
+  guestCount: number;
+  price: number;
+  bathroomCount: number;
+  description: string;
   createdAt: string;
 }
 interface Room {
@@ -26,26 +30,43 @@ const initialDateRange = {
 
 const RoomDetail: React.FC<Room> = ({ room }) => {
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
+
+  const [totalPrice, setTotalPrice] = useState(room.price);
+
+  useEffect(() => {
+    if (dateRange.startDate && dateRange.endDate) {
+      const dayCount = differenceInCalendarDays(
+        dateRange.endDate,
+        dateRange.startDate
+      );
+      if (dayCount && room.price) {
+        setTotalPrice(dayCount * room.price);
+        return;
+      }
+    }
+
+    setTotalPrice(room.price);
+  }, [dateRange, room.price, totalPrice]);
+
   return (
     <div className={`${styles.paddingX}`}>
-      <div className="relative aspect-square w-full h-[70vh]">
+      <ReservationModal
+        dateRange={dateRange}
+        totalPrice={totalPrice}
+        roomId={room.id}
+      />
+      <div className="relative aspect-square w-full h-[80vh]">
         <Image src={room.image} alt="room" fill />
       </div>
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="border rounded-lg">
-          <div className="font-semibold text-[30px] p-4">${room.price}</div>
-          <hr />
-          <div>
-            <CalendarHead
-              dateRange={dateRange}
-              onChangeDate={(value) => setDateRange(value)}
-            />
-          </div>
-        </div>
+        <RoomReservation
+          dateRange={dateRange}
+          onChangeDate={setDateRange}
+          totalPrice={totalPrice}
+          price={room.price}
+        />
 
-        <div className="">
-          <ReservationForm />
-        </div>
+        <div className="">{/* Another component comes here */}</div>
       </div>
     </div>
   );

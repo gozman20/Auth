@@ -9,6 +9,10 @@ interface Iparams {
 const RoomDetails = async ({ params }: { params: Iparams }) => {
   const room = await getRoomById(params);
 
+  if (!room) {
+    return <div>Pls this room has been booked</div>;
+  }
+
   return (
     <div className="pt-[140px]">
       <div className={styles.paddingX}>

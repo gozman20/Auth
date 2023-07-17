@@ -8,8 +8,9 @@ import Button from "../components/Button";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Range } from "react-date-range";
 import { formatISO, format } from "date-fns";
+import Calendar from "@/app/components/inputs/calendar/Calendar";
 import { IoMdArrowDropdown } from "react-icons/io";
-import CalendarHead from "../components/inputs/calendar/CalendarHead";
+import useDateRange from "../hooks/useDateRange";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -64,24 +65,19 @@ const Roomspage = () => {
   const onSubmit = useCallback(async () => {
     setIsLoading(true);
     let currentQuery = {};
-
     if (params) {
       currentQuery = qs.parse(params.toString());
     }
-
     const updatedQuery: any = {
       ...currentQuery,
       guestCount: kids + adults,
     };
-
     if (dateRange.startDate) {
       updatedQuery.startDate = formatISO(dateRange.startDate);
     }
-
     if (dateRange.endDate) {
       updatedQuery.endDate = formatISO(dateRange.endDate);
     }
-
     const url = qs.stringifyUrl(
       {
         url: "/rooms",
@@ -89,7 +85,6 @@ const Roomspage = () => {
       },
       { skipNull: true }
     );
-
     router.push(url);
     setTimeout(() => {
       setIsLoading(false);
@@ -116,16 +111,16 @@ const Roomspage = () => {
             <input
               readOnly
               value=""
-              placeholder={dateValue}
+              placeholder=""
               onClick={toggle}
               className="focus:outline-none border-[2px] border-black/60 p-3 w-full"
             />
 
             <div className="absolute z-10 top-[40px] left-0">
               {openCalendar && (
-                <CalendarHead
-                  dateRange={dateRange}
-                  onChangeDate={(value) => setDateRange(value)}
+                <Calendar
+                  value={dateRange}
+                  onChange={(value) => setDateRange(value.selection)}
                 />
               )}
             </div>

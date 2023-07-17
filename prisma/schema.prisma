@@ -53,20 +53,21 @@ model Rooms {
   // adminId String @db.ObjectId 
   createdAt DateTime @default(now())
   // user User @relation(fields: [adminId], references: [id], onDelete: Cascade)
-  reservations Reservation[]
+ rooms Reservation[]
 }
 
 model Reservation {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  loggedinuserId String @db.ObjectId //this field was added to create reltnshp
-  roomId String @db.ObjectId //this field was added to create reltnshp
-  name String
+  loggedinuserId String? @db.ObjectId //this field was added to create reltnshpnpx p
+  roomId  String @db.ObjectId
+  firstname String
+  lastname String
   phone String
   email String? 
   startDate DateTime
   endDate DateTime
   totalPrice Int
   createdAt DateTime @default(now())
-  user User @relation(fields: [loggedinuserId], references: [id], onDelete: Cascade)
-  room Rooms @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user User? @relation(fields: [loggedinuserId], references: [id], onDelete: Cascade)
+  rooms  Rooms @relation(fields: [roomId], references: [id], onDelete: Cascade)
 }
