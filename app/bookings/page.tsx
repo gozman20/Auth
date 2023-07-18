@@ -4,9 +4,11 @@ import RoomCard from "../components/rooms/RoomCard";
 import BookingClient from "./BookingClient";
 import { getRooms } from "../actions/getRooms";
 import styles from "../components/styles";
-
-const Bookings = async () => {
-  const reservations = await getBookings();
+interface Iparams {
+  roomId?: string;
+}
+const Bookings = async ({ params }: { params: Iparams }) => {
+  const reservations = await getBookings(params);
 
   if (!reservations) return <div>No bookings</div>;
 

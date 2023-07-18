@@ -11,12 +11,14 @@ interface RoomReservationProps {
   onChangeDate(value: Range): void;
   price: number;
   totalPrice: number;
+  disabledDates: Date[];
 }
 const RoomReservation: React.FC<RoomReservationProps> = ({
   dateRange,
   onChangeDate,
   totalPrice,
   price,
+  disabledDates,
 }) => {
   const reservationModal = useReservationModal();
   const date = useDateRange();
@@ -30,6 +32,7 @@ const RoomReservation: React.FC<RoomReservationProps> = ({
         <Calendar
           onChange={(value) => onChangeDate(value.selection)}
           value={dateRange}
+          disabledDates={disabledDates}
         />
         <hr />
         <div className="font-semibold text-[30px]  p-2">

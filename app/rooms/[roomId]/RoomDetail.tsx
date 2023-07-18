@@ -1,12 +1,16 @@
 "use client";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import styles from "../styles";
+import styles from "../../components/styles";
 import Image from "next/image";
-import { Range, RangeFocus } from "react-date-range";
-import { differenceInCalendarDays, differenceInDays } from "date-fns";
-import RoomReservation from "./RoomReservation";
-import useDateRange from "@/app/hooks/useDateRange";
-import ReservationModal from "../modals/ReservationModal";
+import { Range } from "react-date-range";
+import {
+  differenceInCalendarDays,
+  differenceInDays,
+  eachDayOfInterval,
+} from "date-fns";
+import RoomReservation from "../../components/rooms/RoomReservation";
+import ReservationModal from "../../components/modals/ReservationModal";
+import { SafeReservation } from "../../types";
 
 interface RoomDetailProps {
   id: string;
@@ -20,6 +24,7 @@ interface RoomDetailProps {
 }
 interface Room {
   room: RoomDetailProps;
+  reservations?: SafeReservation[];
 }
 
 const initialDateRange = {
@@ -28,10 +33,25 @@ const initialDateRange = {
   key: "selection",
 };
 
-const RoomDetail: React.FC<Room> = ({ room }) => {
+const RoomDetail: React.FC<Room> = ({ room, reservations = [] }) => {
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
 
   const [totalPrice, setTotalPrice] = useState(room.price);
+  //Disable the dates of the previous reservation made on this room
+  const disabledDates = useMemo(() => {
+    let dates: Date[] = [];
+
+    reservations.forEach((reservation: any) => {
+      const range = eachDayOfInterval({
+        start: new Date(reservation.startDate),
+        end: new Date(reservation.endDate),
+      });
+
+      dates = [...dates, ...range];
+    });
+
+    return dates;
+  }, [reservations]);
 
   useEffect(() => {
     if (dateRange.startDate && dateRange.endDate) {
@@ -64,6 +84,7 @@ const RoomDetail: React.FC<Room> = ({ room }) => {
           onChangeDate={setDateRange}
           totalPrice={totalPrice}
           price={room.price}
+          disabledDates={disabledDates}
         />
 
         <div className="">{/* Another component comes here */}</div>

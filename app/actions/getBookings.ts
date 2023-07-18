@@ -1,12 +1,21 @@
 import prisma from "@/app/libs/prismadb";
 
-export default async function getBookings() {
+interface Iparams {
+  roomId?: string;
+}
+export default async function getBookings(params: Iparams) {
   try {
+    const { roomId } = params;
+    const query: any = {};
+    if (roomId) {
+      query.roomId = roomId;
+    }
+
     const bookings = await prisma.reservation.findMany({
+      where: query,
       include: { rooms: true },
       orderBy: { createdAt: "desc" },
     });
-    if (!bookings) return null;
 
     const safeBookings = bookings.map((booking) => ({
       ...booking,

@@ -1,11 +1,13 @@
 import React from "react";
-import Roomspage from "./Roomspage";
+import Roomspage from "../components/rooms/RoomSearch";
 import RoomCard from "../components/rooms/RoomCard";
 import { AiFillAccountBook } from "react-icons/ai";
 import { BiBed } from "react-icons/bi";
 import styles from "../components/styles";
 import { getRooms } from "../actions/getRooms";
 import { RoomParams } from "../actions/getRooms";
+import getBookings from "../actions/getBookings";
+import RoomClient from "./RoomClient";
 
 interface Homeprops {
   searchParams: RoomParams;

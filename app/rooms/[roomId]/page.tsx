@@ -1,14 +1,16 @@
 import getRoomById from "@/app/actions/getRoomById";
 import { getRooms } from "@/app/actions/getRooms";
-import RoomDetail from "@/app/components/rooms/RoomDetail";
+import RoomDetail from "@/app/rooms/[roomId]/RoomDetail";
 import styles from "@/app/components/styles";
+import getBookings from "@/app/actions/getBookings";
 
 interface Iparams {
   roomId?: string;
 }
 const RoomDetails = async ({ params }: { params: Iparams }) => {
   const room = await getRoomById(params);
-
+  const reservations = await getBookings(params);
+  console.log(reservations);
   if (!room) {
     return <div>Pls this room has been booked</div>;
   }
@@ -16,7 +18,7 @@ const RoomDetails = async ({ params }: { params: Iparams }) => {
   return (
     <div className="pt-[140px]">
       <div className={styles.paddingX}>
-        <RoomDetail room={room} />
+        <RoomDetail room={room} reservations={reservations} />
       </div>
     </div>
   );

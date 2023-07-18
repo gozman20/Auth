@@ -27,15 +27,17 @@ const Navbar: React.FC<NavProps> = ({ currentUser }) => {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      window.scrollY > 50 ? setheader(true) : setheader(false);
+      window.scrollY > 30 ? setheader(true) : setheader(false);
     });
   });
 
   return (
     <header
       className={`${
-        header ? "bg-white py-6" : "bg-bb py-8 border-b border-main"
-      } fixed z-50 w-full transition-all duration-500 ${styles.paddingX}`}
+        header ? "bg-white py-4" : "bg-bb py-6 border-b border-main"
+      } fixed z-50 w-full border-b-[2px] border-b-bb transition-all duration-500 ${
+        styles.paddingX
+      }`}
     >
       <div className="flex flex-row justify-between items-center ">
         <div
@@ -49,7 +51,7 @@ const Navbar: React.FC<NavProps> = ({ currentUser }) => {
           Hotel
         </div>
         <nav
-          className={`md:flex flex-row items-center  gap-x-3 text-[18px] hidden ${
+          className={`md:flex flex-row items-center  gap-x-3 text-[14px] hidden ${
             header ? "text-dark/70" : "text-white "
           }`}
         >
@@ -66,7 +68,10 @@ const Navbar: React.FC<NavProps> = ({ currentUser }) => {
             ROOMS
           </div>
           {currentUser?.email === "oraka.emmanuel@gmail.com" ? (
-            <div onClick={AdminModal.onOpen}>ADMIN</div>
+            <div className="flex flex-row gap-2">
+              <div onClick={AdminModal.onOpen}>ADMIN</div>
+              <div onClick={() => router.push("/bookings")}>BOOKINGS</div>
+            </div>
           ) : null}
           {currentUser ? (
             <div

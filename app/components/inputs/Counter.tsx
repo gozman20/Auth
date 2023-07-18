@@ -9,8 +9,14 @@ interface CounterProps {
   onChange(value: number): void;
 }
 
-const Counter: React.FC<CounterProps> = ({ title, value, onChange,subtitle }) => {
+const Counter: React.FC<CounterProps> = ({
+  title,
+  value,
+  onChange,
+  subtitle,
+}) => {
   const onAdd = () => {
+    if (value === 4) return;
     onChange(value + 1);
   };
   const onReduce = () => {
@@ -21,7 +27,7 @@ const Counter: React.FC<CounterProps> = ({ title, value, onChange,subtitle }) =>
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-row gap-6 items-center">
       <div>{title}</div>
       <div>
         {" "}
