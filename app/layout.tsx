@@ -1,5 +1,5 @@
 import getCurrentUser from "./actions/getUser";
-import Navbar from "./components/navbar/Navbar";
+import Navbar from "@/components/navbar/Navbar";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import ToastProvider from "./toastProvider/ToastProvider";

@@ -8,7 +8,7 @@ import Button from "../Button";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Range } from "react-date-range";
 import { formatISO, format } from "date-fns";
-import Calendar from "@/app/components/inputs/calendar/Calendar";
+import Calendar from "@/components/inputs/calendar/Calendar";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 const initialDateRange = {
