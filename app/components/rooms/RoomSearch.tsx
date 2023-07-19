@@ -86,12 +86,12 @@ const RoomSearch = () => {
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);
-  }, [params, adults, kids, isLoading, dateRange, router]);
+  }, [params, adults, kids, dateRange, router]);
 
   const actionLabel = useMemo(() => {
     if (isLoading) return "Loading";
     return "Search";
-  }, []);
+  }, [isLoading]);
 
   const toggle = () => {
     setOpenCalendar((prev) => !prev);
