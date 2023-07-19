@@ -1,5 +1,5 @@
 import React from "react";
-import Calendar from "@/app/components/inputs/calendar/Calendar";
+import Calendar from "@/components/inputs/calendar/Calendar";
 import { Range } from "react-date-range";
 import Button from "../Button";
 import useReservationModal from "@/app/hooks/useReservationModal";
