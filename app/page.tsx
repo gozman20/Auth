@@ -11,7 +11,12 @@ interface Homeprops {
 }
 const Home = async ({ searchParams }: Homeprops) => {
   const rooms = await getRooms(searchParams);
-
+  if (rooms.length === 0)
+    return (
+      <ClientOnly>
+        <div>No room found</div>
+      </ClientOnly>
+    );
   return (
     <ClientOnly>
       <div className="pt-[145px]">
