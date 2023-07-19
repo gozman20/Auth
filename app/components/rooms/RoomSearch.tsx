@@ -10,7 +10,6 @@ import { Range } from "react-date-range";
 import { formatISO, format } from "date-fns";
 import Calendar from "@/app/components/inputs/calendar/Calendar";
 import { IoMdArrowDropdown } from "react-icons/io";
-import useDateRange from "../../hooks/useDateRange";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -18,7 +17,7 @@ const initialDateRange = {
   key: "selection",
 };
 
-const Roomspage = () => {
+const RoomSearch = () => {
   const router = useRouter();
   const [openAdults, setOpenAdults] = useState(false);
   const params = useSearchParams();
@@ -46,8 +45,6 @@ const Roomspage = () => {
     defaultValues: {
       kids: 0,
       adults: 1,
-      //   startDate: "",
-      //   endDate: "",
     },
   });
 
@@ -164,10 +161,9 @@ const Roomspage = () => {
 
           <div className="flex-1 w-full">
             <Button
-              small={false}
               label={actionLabel}
               disabled={isLoading}
-              onClick={onSubmit}
+              onClick={handleSubmit(onSubmit)}
             />
           </div>
         </div>
@@ -176,4 +172,4 @@ const Roomspage = () => {
   );
 };
 
-export default Roomspage;
+export default RoomSearch;

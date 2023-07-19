@@ -1,3 +1,4 @@
+"use client";
 import { Rooms } from "@prisma/client";
 import React from "react";
 import { SafeReservation, SafeRoom } from "../types";
@@ -8,7 +9,7 @@ interface BookingClientprops {
 }
 const BookingClient: React.FC<BookingClientprops> = ({ reservations = [] }) => {
   return (
-    <div>
+    <>
       <div
         className="
       mt-3
@@ -25,10 +26,12 @@ const BookingClient: React.FC<BookingClientprops> = ({ reservations = [] }) => {
             reservation={reservation}
             room={reservation.rooms}
             key={reservation.id}
+            onAction={() => {}}
+            actionLabel="Cancel booking"
           />
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

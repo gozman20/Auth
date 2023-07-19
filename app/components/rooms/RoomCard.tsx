@@ -3,18 +3,42 @@ import { SafeReservation, SafeRoom } from "@/app/types";
 import { Rooms } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useCallback } from "react";
 import { IconType } from "react-icons";
 import { GoPeople } from "react-icons/go";
 import { MdOutlineBathroom } from "react-icons/md";
+import Button from "../Button";
 
-interface RoomProps {
+interface RoomCardProps {
   room: SafeRoom;
   reservation?: SafeReservation;
+  onAction?(id: string): void;
+  actionId?: string;
+  actionLabel?: string;
+  disabled?: boolean;
 }
 
-const RoomCard: React.FC<RoomProps> = ({ room, reservation }) => {
+const RoomCard: React.FC<RoomCardProps> = ({
+  room,
+  reservation,
+  onAction,
+  actionLabel,
+  actionId = "",
+  disabled,
+}) => {
   const router = useRouter();
+
+  const handleCancel = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      if (disabled) {
+        return;
+      }
+      onAction?.(actionId);
+    },
+    [disabled, onAction, actionId]
+  );
+
   return (
     <div
       onClick={() => router.push(`/rooms/${room.id}`)}
@@ -54,6 +78,11 @@ const RoomCard: React.FC<RoomProps> = ({ room, reservation }) => {
         <div className="mt-2 text-[14px] text-neutral-500">
           {room.description}
         </div>
+        {onAction && (
+          <div>
+            <Button label={actionLabel} onClick={handleCancel} small />
+          </div>
+        )}
       </div>
     </div>
   );
