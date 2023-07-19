@@ -10,7 +10,7 @@ import {
 } from "date-fns";
 import RoomReservation from "@/components/rooms/RoomReservation";
 import ReservationModal from "@/components/modals/ReservationModal";
-import { SafeReservation } from "../../types";
+import { SafeReservation } from "@/types";
 
 interface RoomDetailProps {
   id: string;

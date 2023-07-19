@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { SafeReservation, SafeRoom } from "../types";
+import { SafeReservation } from "@/types";
 import RoomCard from "@/components/rooms/RoomCard";
 
 interface BookingClientprops {

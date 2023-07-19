@@ -1,5 +1,5 @@
 import React from "react";
-import getBookings from "../actions/getBookings";
+import getBookings from "@/actions/getBookings";
 import BookingClient from "./BookingClient";
 import styles from "@/components/styles";
 interface Iparams {

@@ -64,7 +64,7 @@
 import React from "react";
 
 const PropertyClient = () => {
-  return <div></div>;
+  return <div>ok</div>;
 };
 
 export default PropertyClient;
