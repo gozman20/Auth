@@ -18,7 +18,7 @@ const PropertyClient: React.FC<PropertyClientProps> = ({ rooms = [] }) => {
     (id: string) => {
       console.log(id);
       axios
-        .delete(`http://localhost:3000/api/rooms/${id}`)
+        .delete(`/api/rooms/${id}`)
         .then(() => {
           toast.success("Deleted");
           router.refresh();

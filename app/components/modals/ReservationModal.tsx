@@ -40,7 +40,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({
     setLoading(true);
 
     axios
-      .post("http://localhost:3000/api/reservation", {
+      .post("/api/reservation", {
         ...data,
         totalPrice,
         startDate: dateRange.startDate,
