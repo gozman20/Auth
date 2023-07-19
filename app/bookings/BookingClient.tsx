@@ -1,8 +1,7 @@
 "use client";
-import { Rooms } from "@prisma/client";
 import React from "react";
 import { SafeReservation, SafeRoom } from "../types";
-import RoomCard from "../components/rooms/RoomCard";
+import RoomCard from "@/components/rooms/RoomCard";
 
 interface BookingClientprops {
   reservations: SafeReservation[];

@@ -1,8 +1,8 @@
 import getRoomById from "@/app/actions/getRoomById";
 import RoomDetail from "@/app/rooms/[roomId]/RoomDetail";
-import styles from "@/app/components/styles";
+import styles from "@/components/styles";
 import getBookings from "@/app/actions/getBookings";
-import ClientOnly from "@/app/components/ClientOnly";
+import ClientOnly from "@/components/ClientOnly";
 
 interface Iparams {
   roomId?: string;

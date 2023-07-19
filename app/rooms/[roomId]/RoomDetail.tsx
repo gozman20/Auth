@@ -1,6 +1,6 @@
 "use client";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import styles from "../../components/styles";
+import styles from "@/components/styles";
 import Image from "next/image";
 import { Range } from "react-date-range";
 import {
@@ -8,8 +8,8 @@ import {
   differenceInDays,
   eachDayOfInterval,
 } from "date-fns";
-import RoomReservation from "../../components/rooms/RoomReservation";
-import ReservationModal from "../../components/modals/ReservationModal";
+import RoomReservation from "@/components/rooms/RoomReservation";
+import ReservationModal from "@/components/modals/ReservationModal";
 import { SafeReservation } from "../../types";
 
 interface RoomDetailProps {
