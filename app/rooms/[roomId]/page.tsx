@@ -1,5 +1,4 @@
 import getRoomById from "@/app/actions/getRoomById";
-
 import RoomDetail from "@/app/rooms/[roomId]/RoomDetail";
 import styles from "@/app/components/styles";
 import getBookings from "@/app/actions/getBookings";

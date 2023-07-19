@@ -21,7 +21,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <Navbar currentUser={currentUser} /> */}
+        <Navbar currentUser={currentUser} />
         <ToastProvider />
         {children}
       </body>
