@@ -6,6 +6,7 @@ import ToastProvider from "@/toastProvider/ToastProvider";
 import RegisterModal from "@/components/modals/RegisterModal";
 import LoginModal from "@/components/modals/LoginModal";
 import AdminModal from "@/components/modals/AdminModal";
+import ClientOnly from "@/components/ClientOnly";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,11 +25,14 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar currentUser={currentUser} />
-        <RegisterModal />
-        <LoginModal />
-        <AdminModal />
-        <ToastProvider />
+        <ClientOnly>
+          <Navbar currentUser={currentUser} />
+          <RegisterModal />
+          <LoginModal />
+          <AdminModal />
+          <ToastProvider />
+        </ClientOnly>
+
         {children}
       </body>
     </html>
