@@ -2,9 +2,7 @@ import React from "react";
 import Calendar from "@/components/inputs/calendar/Calendar";
 import { Range } from "react-date-range";
 import Button from "../Button";
-import useReservationModal from "@/app/hooks/useReservationModal";
-import useAdminModal from "@/app/hooks/useAdminModal";
-import useDateRange from "@/app/hooks/useDateRange";
+import useReservationModal from "@/hooks/useReservationModal";
 
 interface RoomReservationProps {
   dateRange: Range;
@@ -21,7 +19,7 @@ const RoomReservation: React.FC<RoomReservationProps> = ({
   disabledDates,
 }) => {
   const reservationModal = useReservationModal();
-  const date = useDateRange();
+
   return (
     <div>
       <div className="border rounded-lg">

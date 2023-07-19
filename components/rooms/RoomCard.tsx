@@ -1,5 +1,5 @@
 "use client";
-import { SafeReservation, SafeRoom } from "@/app/types";
+import { SafeReservation, SafeRoom } from "@/types";
 import { Rooms } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
