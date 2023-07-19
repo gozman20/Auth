@@ -1,5 +1,5 @@
 import React from "react";
-import RoomSearch from "./components/rooms/RoomSearch";
+// import RoomSearch from "./components/rooms/RoomSearch"
 import RoomCard from "./components/rooms/RoomCard";
 import styles from "./components/styles";
 import { getRooms } from "./actions/getRooms";
