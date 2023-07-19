@@ -3,6 +3,7 @@ import { getRooms } from "@/app/actions/getRooms";
 import RoomDetail from "@/app/rooms/[roomId]/RoomDetail";
 import styles from "@/app/components/styles";
 import getBookings from "@/app/actions/getBookings";
+import ClientOnly from "@/app/components/ClientOnly";
 
 interface Iparams {
   roomId?: string;
@@ -10,17 +11,19 @@ interface Iparams {
 const RoomDetails = async ({ params }: { params: Iparams }) => {
   const room = await getRoomById(params);
   const reservations = await getBookings(params);
-  console.log(reservations);
+
   if (!room) {
     return <div>Pls this room has been booked</div>;
   }
 
   return (
-    <div className="pt-[140px]">
-      <div className={styles.paddingX}>
-        <RoomDetail room={room} reservations={reservations} />
+    <ClientOnly>
+      <div className="pt-[140px]">
+        <div className={styles.paddingX}>
+          <RoomDetail room={room} reservations={reservations} />
+        </div>
       </div>
-    </div>
+    </ClientOnly>
   );
 };
 
