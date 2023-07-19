@@ -4,7 +4,7 @@ import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../inputs/Input";
 import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
-import useReservationModal from "@/app/hooks/useReservationModal";
+import useReservationModal from "@/hooks/useReservationModal";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { Range } from "react-date-range";
