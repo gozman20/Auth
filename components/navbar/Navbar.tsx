@@ -4,15 +4,12 @@ import styles from "../styles";
 import { useState, useEffect } from "react";
 import { ImLocation2 } from "react-icons/im";
 import { GiHamburgerMenu } from "react-icons/gi";
-import useRegisterModal from "@/app/hooks/useRegisterModal";
-import useLoginModal from "@/app/hooks/useLoginModal";
+import useRegisterModal from "@/hooks/useRegisterModal";
+import useLoginModal from "@/hooks/useLoginModal";
 import { useRouter } from "next/navigation";
-import { User } from "@prisma/client";
-import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
-import { SafeUser } from "@/app/types";
-import AdminModal from "../modals/AdminModal";
-import useAdminModal from "@/app/hooks/useAdminModal";
+import { SafeUser } from "@/types";
+import useAdminModal from "@/hooks/useAdminModal";
 
 interface NavProps {
   currentUser: SafeUser | null;
