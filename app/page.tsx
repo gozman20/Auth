@@ -15,7 +15,7 @@ const Home = async ({ searchParams }: Homeprops) => {
   return (
     <ClientOnly>
       <div className="pt-[145px]">
-        <RoomSearch />
+        {/* <RoomSearch /> */}
         <div className={`${styles.paddingX}`}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-[30px] gap-4">
             {rooms.map((room) => (
