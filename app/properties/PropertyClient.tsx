@@ -61,3 +61,10 @@
 // };
 
 // export default PropertyClient;
+import React from "react";
+
+const PropertyClient = () => {
+  return <div></div>;
+};
+
+export default PropertyClient;
