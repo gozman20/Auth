@@ -91,7 +91,7 @@ const RoomSearch = () => {
   const actionLabel = useMemo(() => {
     if (isLoading) return "Loading";
     return "Search";
-  }, [isLoading]);
+  }, []);
 
   const toggle = () => {
     setOpenCalendar((prev) => !prev);
