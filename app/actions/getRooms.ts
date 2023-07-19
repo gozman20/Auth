@@ -4,7 +4,7 @@ import prisma from "@/app/libs/prismadb";
 export interface RoomParams {
   guestCount?: string;
 }
-export async function getRooms(params: RoomParams) {
+export default async function getRooms(params: RoomParams) {
   try {
     const { guestCount } = params;
     let query: any = {};

@@ -2,7 +2,7 @@ import React from "react";
 // import RoomSearch from "./components/rooms/RoomSearch"
 import RoomCard from "./components/rooms/RoomCard";
 import styles from "./components/styles";
-import { getRooms } from "./actions/getRooms";
+import getRooms from "./actions/getRooms";
 import { RoomParams } from "./actions/getRooms";
 import ClientOnly from "./components/ClientOnly";
 

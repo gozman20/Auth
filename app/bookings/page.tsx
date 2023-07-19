@@ -2,7 +2,7 @@ import React from "react";
 import getBookings from "../actions/getBookings";
 import RoomCard from "../components/rooms/RoomCard";
 import BookingClient from "./BookingClient";
-import { getRooms } from "../actions/getRooms";
+import getRooms from "../actions/getRooms";
 import styles from "../components/styles";
 interface Iparams {
   roomId?: string;
