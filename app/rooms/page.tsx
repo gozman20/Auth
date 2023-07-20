@@ -6,6 +6,7 @@ import getRooms from "@/actions/getRooms";
 import { RoomParams } from "@/actions/getRooms";
 import ClientOnly from "@/components/ClientOnly";
 
+export const dynamic = "force-dynamic";
 interface Homeprops {
   searchParams: RoomParams;
 }
