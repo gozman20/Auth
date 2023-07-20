@@ -32,7 +32,6 @@ export default async function RootLayout({
           <AdminModal />
           <ToastProvider />
         </ClientOnly>
-
         {children}
       </body>
     </html>
