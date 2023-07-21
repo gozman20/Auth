@@ -5,6 +5,8 @@ import getRooms from "@/actions/getRooms";
 import { RoomParams } from "@/actions/getRooms";
 import ClientOnly from "@/components/ClientOnly";
 
+import PageSetUp from "./PageSetUp";
+
 export const dynamic = "force-dynamic";
 
 interface Homeprops {
@@ -12,6 +14,7 @@ interface Homeprops {
 }
 const Home = async ({ searchParams }: Homeprops) => {
   const rooms = await getRooms(searchParams);
+
   if (rooms.length === 0)
     return (
       <ClientOnly>
@@ -20,17 +23,7 @@ const Home = async ({ searchParams }: Homeprops) => {
     );
   return (
     <ClientOnly>
-      <div className="pt-[145px]">
-        <RoomSearch />
-
-        <div className={`${styles.paddingX}`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-[30px] gap-4">
-            {rooms.map((room: any) => (
-              <RoomCard key={room.id} room={room} />
-            ))}
-          </div>
-        </div>
-      </div>
+      <PageSetUp rooms={rooms} />
     </ClientOnly>
   );
 };

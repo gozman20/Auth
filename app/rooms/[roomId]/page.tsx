@@ -17,10 +17,8 @@ const RoomDetails = async ({ params }: { params: Iparams }) => {
 
   return (
     <ClientOnly>
-      <div className="pt-[140px]">
-        <div className={styles.paddingX}>
-          <RoomDetail room={room} reservations={reservations} />
-        </div>
+      <div>
+        <RoomDetail room={room} reservations={reservations} />
       </div>
     </ClientOnly>
   );

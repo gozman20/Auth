@@ -7,6 +7,7 @@ import RegisterModal from "@/components/modals/RegisterModal";
 import LoginModal from "@/components/modals/LoginModal";
 import AdminModal from "@/components/modals/AdminModal";
 import ClientOnly from "@/components/ClientOnly";
+import styles from "@/components/styles";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +33,7 @@ export default async function RootLayout({
           <AdminModal />
           <ToastProvider />
         </ClientOnly>
-        {children}
+        <div className={`pb-20 pt-28 ${styles.paddingX}`}>{children}</div>
       </body>
     </html>
   );

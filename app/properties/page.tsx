@@ -15,15 +15,13 @@ const Properties = async ({ searchParams }: Homeprops) => {
   if (rooms.length === 0)
     return (
       <ClientOnly>
-        <div className={`pt-[145px] ${styles.paddingX}`}>
-          You have not created any room
-        </div>
+        <div>You have not created any room</div>
       </ClientOnly>
     );
 
   return (
     <ClientOnly>
-      <div className={`pt-[145px] ${styles.paddingX}`}>
+      <div>
         <PropertyClient rooms={rooms} />
       </div>
     </ClientOnly>

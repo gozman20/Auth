@@ -24,21 +24,21 @@ const Navbar: React.FC<NavProps> = ({ currentUser }) => {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      window.scrollY > 30 ? setheader(true) : setheader(false);
+      window.scrollY > 60 ? setheader(true) : setheader(false);
     });
   });
 
   return (
     <header
       className={`${
-        header ? "bg-white py-4" : "bg-bb py-6 border-b border-main"
+        header ? "bg-bb py-4" : "bg-white py-6 border-b border-main"
       } fixed z-50 w-full border-b-[2px] border-b-bb transition-all duration-500 ${
         styles.paddingX
       }`}
     >
       <div className="flex flex-row justify-between items-center ">
         <div
-          className={`${header ? "text-bb" : ""}
+          className={`${header ? "text-white" : ""}
          text-[25px] md:text-[40px] 
          flex flex-row justify-center
           items-center gap-x-3 `}
@@ -49,7 +49,7 @@ const Navbar: React.FC<NavProps> = ({ currentUser }) => {
         </div>
         <nav
           className={`md:flex flex-row items-center  gap-x-3 text-[14px] hidden ${
-            header ? "text-dark/70" : "text-white "
+            header ? "text-white" : "text-bb "
           }`}
         >
           <div

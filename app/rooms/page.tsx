@@ -5,6 +5,8 @@ import styles from "@/components/styles";
 import getRooms from "@/actions/getRooms";
 import { RoomParams } from "@/actions/getRooms";
 import ClientOnly from "@/components/ClientOnly";
+import Image from "next/image";
+import Heading from "@/components/Heading";
 
 export const dynamic = "force-dynamic";
 interface Homeprops {
@@ -15,11 +17,12 @@ const Rooms = async ({ searchParams }: Homeprops) => {
 
   return (
     <ClientOnly>
-      <div className="pt-[145px]">
+      <div className="mt-6">
         <RoomSearch />
-        <div className={`${styles.paddingX}`}>
+
+        <div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-[30px] gap-4">
-            {rooms.map((room) => (
+            {rooms.map((room: any) => (
               <RoomCard key={room.id} room={room} />
             ))}
           </div>

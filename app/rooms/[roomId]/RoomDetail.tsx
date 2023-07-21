@@ -75,7 +75,7 @@ const RoomDetail: React.FC<Room> = ({ room, reservations = [] }) => {
         totalPrice={totalPrice}
         roomId={room.id}
       />
-      <div className="relative aspect-square w-full h-[80vh]">
+      <div className="relative aspect-square w-full h-[60vh]">
         <Image src={room.image} alt="room" fill />
       </div>
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
