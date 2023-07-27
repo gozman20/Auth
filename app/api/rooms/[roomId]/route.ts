@@ -16,3 +16,22 @@ export async function DELETE(req: Request, { params }: { params: Params }) {
     console.log(err);
   }
 }
+export async function PATCH(req: Request, { params }: { params: Params }) {
+  try {
+    const { roomId } = params;
+    const { image, description, name } = await req.json();
+    const room = await prisma.rooms.update({
+      where: {
+        id: roomId,
+      },
+      data: {
+        image,
+        description,
+        title: name,
+      },
+    });
+    return NextResponse.json(room);
+  } catch (err) {
+    console.log(err);
+  }
+}

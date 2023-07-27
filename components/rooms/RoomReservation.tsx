@@ -5,6 +5,7 @@ import Button from "../Button";
 import useReservationModal from "@/hooks/useReservationModal";
 
 interface RoomReservationProps {
+  totalNight: number;
   dateRange: Range;
   onChangeDate(value: Range): void;
   price: number;
@@ -13,6 +14,7 @@ interface RoomReservationProps {
 }
 const RoomReservation: React.FC<RoomReservationProps> = ({
   dateRange,
+  totalNight,
   onChangeDate,
   totalPrice,
   price,
@@ -22,8 +24,8 @@ const RoomReservation: React.FC<RoomReservationProps> = ({
 
   return (
     <div>
-      <div className="border rounded-lg">
-        <div className="font-semibold text-[30px] p-4">
+      <div className="border rounded-lg ">
+        <div className="font-semibold text-[20px] p-2">
           Price/night ${price}
         </div>
         <hr />
@@ -33,8 +35,9 @@ const RoomReservation: React.FC<RoomReservationProps> = ({
           disabledDates={disabledDates}
         />
         <hr />
-        <div className="font-semibold text-[30px]  p-2">
-          Total price ${totalPrice}
+        <div className="font-semibold text-[20px]  p-2 flex justify-between">
+          Total price for {totalNight} night
+          <div> ${totalPrice}</div>
         </div>
         <hr />
         <div className="p-2">

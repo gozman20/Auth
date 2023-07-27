@@ -59,6 +59,7 @@ const RoomDetail: React.FC<Room> = ({ room, reservations = [] }) => {
         dateRange.endDate,
         dateRange.startDate
       );
+
       if (dayCount && room.price) {
         setTotalPrice(dayCount * room.price);
         return;
@@ -78,8 +79,9 @@ const RoomDetail: React.FC<Room> = ({ room, reservations = [] }) => {
       <div className="relative aspect-square w-full h-[60vh]">
         <Image src={room.image} alt="room" fill />
       </div>
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <RoomReservation
+          totalNight={totalPrice / room.price}
           dateRange={dateRange}
           onChangeDate={setDateRange}
           totalPrice={totalPrice}

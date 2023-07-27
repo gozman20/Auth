@@ -19,7 +19,7 @@ const LoginModal = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FieldValues>({
     defaultValues: {
       email: "",
@@ -33,19 +33,21 @@ const LoginModal = () => {
     signIn("credentials", {
       ...data,
       redirect: false,
-    }).then((callback) => {
-      setIsLoading(false);
+    })
+      .then((callback) => {
+        setIsLoading(false);
 
-      if (callback?.ok) {
-        toast.success("Logged in");
-        router.refresh();
-        loginModal.onClose();
-      }
-
-      if (callback?.error) {
-        toast.error(callback.error);
-      }
-    });
+        if (callback?.ok) {
+          toast.success("Logged in");
+          router.refresh();
+          loginModal.onClose();
+        }
+      })
+      .catch((callback) => {
+        if (callback?.error) {
+          toast.error(callback.error);
+        }
+      });
   };
 
   const onToggle = useCallback(() => {

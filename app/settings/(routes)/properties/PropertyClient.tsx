@@ -7,45 +7,27 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
+import { Button } from "@/components/ui/button";
+import { DataTable } from "@/components/ui/data-table";
+import { RoomsColumn, roomcolumns } from "@/components/roomcolumn";
+import { BookingColumn } from "@/components/column";
+
 interface PropertyClientProps {
-  rooms: SafeRoom[];
+  // rooms: SafeRoom[];
+  rooms: RoomsColumn[];
 }
 const PropertyClient: React.FC<PropertyClientProps> = ({ rooms = [] }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const onDelete = useCallback(
-    (id: string) => {
-      console.log(id);
-      axios
-        .delete(`/api/rooms/${id}`)
-        .then(() => {
-          toast.success("Deleted");
-          router.refresh();
-        })
-        .catch((error) => {
-          toast.error(error?.response?.data?.error);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    },
-    [router]
-  );
+ 
   return (
     <div className={`${styles.boxWidth} `}>
-      <div
-        className="
-mt-8
-grid
-grid-cols-1
-sm::grid-cols-2
-md:grid-cols-3
-lg:grid-cols-4
-gap-4
-"
-      >
-        {rooms.map((room) => (
+      <div className="my-3">
+        {" "}
+        <DataTable data={rooms} columns={roomcolumns} />
+      </div>
+      {/* {rooms.map((room) => (
           <RoomCard
             room={room}
             key={room.id}
@@ -54,11 +36,9 @@ gap-4
             actionId={room.id}
             disabled={isLoading}
           />
-        ))}
-      </div>
+        ))} */}
     </div>
   );
 };
 
 export default PropertyClient;
-

@@ -4,6 +4,8 @@ import { RoomParams } from "@/actions/getRooms";
 import PropertyClient from "./PropertyClient";
 import styles from "@/components/styles";
 import ClientOnly from "@/components/ClientOnly";
+import Heading from "@/components/Heading";
+import { Button } from "@/components/ui/button";
 
 export const dynamic = "force-dynamic";
 
@@ -19,10 +21,25 @@ const Properties = async ({ searchParams }: Homeprops) => {
       </ClientOnly>
     );
 
+  const formattedRoom = rooms.map((item) => ({
+    id: item.id,
+    name: item.title,
+    description: item.description,
+    guest: item.guestCount,
+  }));
+
   return (
     <ClientOnly>
+      <div className="flex justify-between items-center">
+        <Heading title={`Rooms ${rooms.length}`} />
+        <div className="flex justify-end gap-y-2">
+          {" "}
+          <Button variant="default">Add new</Button>
+        </div>
+      </div>
+
       <div>
-        <PropertyClient rooms={rooms} />
+        <PropertyClient rooms={formattedRoom} />
       </div>
     </ClientOnly>
   );

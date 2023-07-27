@@ -16,12 +16,11 @@ import Button from "../Button";
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
-  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FieldValues>({
     defaultValues: {
       name: "",
@@ -31,8 +30,6 @@ const RegisterModal = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(true);
-
     axios
       .post("/api/register", data)
       .then(() => {
@@ -42,9 +39,6 @@ const RegisterModal = () => {
       })
       .catch((error) => {
         toast.error(error?.response?.data?.error);
-      })
-      .finally(() => {
-        setIsLoading(false);
       });
   };
 
@@ -60,7 +54,7 @@ const RegisterModal = () => {
       <Input
         id="name"
         label="Name"
-        disabled={isLoading}
+        disabled={isSubmitting}
         register={register}
         errors={errors}
         required
@@ -68,7 +62,7 @@ const RegisterModal = () => {
       <Input
         id="email"
         label="Email"
-        disabled={isLoading}
+        disabled={isSubmitting}
         register={register}
         errors={errors}
         required
@@ -77,7 +71,7 @@ const RegisterModal = () => {
         id="password"
         label="Password"
         type="password"
-        disabled={isLoading}
+        disabled={isSubmitting}
         register={register}
         errors={errors}
         required
@@ -128,7 +122,7 @@ const RegisterModal = () => {
 
   return (
     <Modal
-      disabled={isLoading}
+      disabled={isSubmitting}
       isOpen={registerModal.isOpen}
       title="Register"
       actionLabel="Continue"

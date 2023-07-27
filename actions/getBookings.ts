@@ -20,8 +20,8 @@ export default async function getBookings(params: Iparams) {
     const safeBookings = bookings.map((booking) => ({
       ...booking,
       createdAt: booking.createdAt.toISOString(),
-      startDate: booking.startDate.toISOString(),
-      endDate: booking.endDate.toISOString(),
+      // startDate: booking.startDate.toISOString(),
+      // endDate: booking.endDate.toISOString(),
       rooms: {
         ...booking.rooms,
         createdAt: booking.rooms.createdAt.toISOString(),

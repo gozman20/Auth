@@ -22,15 +22,13 @@ enum STEPS {
 const AdminModal = () => {
   const router = useRouter();
   const adminModal = useAdminModal();
-  const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.CATEGORY);
-
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm<FieldValues>({
     defaultValues: {
@@ -68,7 +66,6 @@ const AdminModal = () => {
       return onNext();
     }
 
-    setIsLoading(true);
     console.log(data);
 
     axios
@@ -82,9 +79,6 @@ const AdminModal = () => {
       })
       .catch(() => {
         toast.error("Something went wrong.");
-      })
-      .finally(() => {
-        setIsLoading(false);
       });
   };
 
@@ -110,7 +104,7 @@ const AdminModal = () => {
       <Input
         id="title"
         label="Title"
-        disabled={isLoading}
+        disabled={isSubmitting}
         register={register}
         errors={errors}
         required
@@ -140,7 +134,7 @@ const AdminModal = () => {
         <Input
           id="description"
           label="Description"
-          disabled={isLoading}
+          disabled={isSubmitting}
           register={register}
           errors={errors}
           required
@@ -170,7 +164,7 @@ const AdminModal = () => {
           label="Price"
           formatPrice
           type="number"
-          disabled={isLoading}
+          disabled={isSubmitting}
           register={register}
           errors={errors}
           required
@@ -181,7 +175,7 @@ const AdminModal = () => {
 
   return (
     <Modal
-      disabled={isLoading}
+      disabled={isSubmitting}
       isOpen={adminModal.isOpen}
       title="Hotel your home!"
       actionLabel={actionLabel}

@@ -31,8 +31,8 @@ const Navbar: React.FC<NavProps> = ({ currentUser }) => {
   return (
     <header
       className={`${
-        header ? "bg-bb py-4" : "bg-white py-6 border-b border-main"
-      } fixed z-50 w-full border-b-[2px] border-b-bb transition-all duration-500 ${
+        header ? "bg-bb py-2" : "bg-white py-3  border-b border-main"
+      } fixed z-50 w-full  border-b-[2px] border-b-bb transition-all duration-500 ${
         styles.paddingX
       }`}
     >
@@ -53,26 +53,36 @@ const Navbar: React.FC<NavProps> = ({ currentUser }) => {
           }`}
         >
           <div
-            className="hover:border-b hover:border-bb"
+            className="hover:border-b hover:border-bb cursor-pointer"
             onClick={() => router.push("/")}
           >
             HOME
           </div>
           <div
-            className="hover:border-b hover:border-bb"
+            className="hover:border-b hover:border-bb cursor-pointer"
             onClick={() => router.push("/rooms")}
           >
             ROOMS
           </div>
           {currentUser?.email === "oraka.emmanuel@gmail.com" ? (
             <div className="flex flex-row gap-2">
-              <div onClick={AdminModal.onOpen}>ADMIN</div>
-              <div onClick={() => router.push("/bookings")}>BOOKINGS</div>
+              <div
+                onClick={AdminModal.onOpen}
+                className="hover:border-b hover:border-bb cursor-pointer"
+              >
+                ADMIN
+              </div>
+              <div
+                className="hover:border-b hover:border-bb cursor-pointer"
+                onClick={() => router.push("/settings/bookings")}
+              >
+                SETTINGS
+              </div>
             </div>
           ) : null}
           {currentUser ? (
             <div
-              className="hover:border-b hover:border-bb"
+              className="hover:border-b hover:border-bb cursor-pointer"
               onClick={() => signOut()}
             >
               LOGOUT

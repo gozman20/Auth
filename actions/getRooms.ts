@@ -2,14 +2,35 @@ import prisma from "@/libs/prismadb";
 
 export interface RoomParams {
   guestCount?: string;
+  startDate?: string;
+  endDate?: string;
 }
 export default async function getRooms(params: RoomParams) {
   try {
-    const { guestCount } = params;
+    const { guestCount, startDate, endDate } = params;
     let query: any = {};
     if (guestCount) {
       query.guestCount = { gte: +guestCount };
     }
+    if (startDate && endDate) {
+      query.NOT = {
+        rooms: {
+          some: {
+            OR: [
+              {
+                endDate: { gte: startDate },
+                startDate: { lte: startDate },
+              },
+              {
+                startDate: { lte: endDate },
+                endDate: { gte: endDate },
+              },
+            ],
+          },
+        },
+      };
+    }
+
     const rooms = await prisma.rooms.findMany({
       where: query,
       orderBy: { createdAt: "desc" },

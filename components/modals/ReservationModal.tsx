@@ -20,12 +20,11 @@ const ReservationModal: React.FC<ReservationModalProps> = ({
   totalPrice,
   roomId,
 }) => {
-  const [isLoading, setLoading] = useState(false);
   const reservationModal = useReservationModal();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FieldValues>({
     defaultValues: {
       firstname: "",
@@ -37,7 +36,6 @@ const ReservationModal: React.FC<ReservationModalProps> = ({
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     // console.log({ ...data, roomId });
-    setLoading(true);
 
     axios
       .post("/api/reservation", {
@@ -52,9 +50,6 @@ const ReservationModal: React.FC<ReservationModalProps> = ({
       })
       .catch(() => {
         toast.error("Something went wrong");
-      })
-      .finally(() => {
-        setLoading(false);
       });
   };
 
@@ -66,7 +61,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({
           <Input
             id="firstname"
             label="First Name"
-            disabled={isLoading}
+            disabled={isSubmitting}
             register={register}
             errors={errors}
             required
@@ -74,7 +69,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({
           <Input
             id="lastname"
             label="Last Name"
-            disabled={isLoading}
+            disabled={isSubmitting}
             register={register}
             errors={errors}
             required
@@ -82,7 +77,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({
           <Input
             id="email"
             label="Email"
-            disabled={isLoading}
+            disabled={isSubmitting}
             register={register}
             errors={errors}
             required
@@ -91,7 +86,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({
             id="phone"
             label="Phone"
             type="number"
-            disabled={isLoading}
+            disabled={isSubmitting}
             register={register}
             errors={errors}
             required
