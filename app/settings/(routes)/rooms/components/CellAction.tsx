@@ -46,7 +46,7 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Action</DropdownMenuLabel>
           <DropdownMenuItem
-            onClick={() => router.push(`/settings/properties/${data.id}`)}
+            onClick={() => router.push(`/settings/rooms/${data.id}`)}
           >
             <BiEdit size={25} className="mr-2" />
             Update

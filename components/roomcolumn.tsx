@@ -1,6 +1,6 @@
 "use client";
 
-import CellAction from "@/app/settings/(routes)/properties/CellAction";
+import CellAction from "@/app/settings/(routes)/rooms/components/CellAction";
 import { ColumnDef } from "@tanstack/react-table";
 
 // This type is used to define the shape of our data.

@@ -1,4 +1,4 @@
-import prisma from "@/libs/prismadb";
+import prismadb from "@/libs/prismadb";
 
 export interface RoomParams {
   guestCount?: string;
@@ -31,7 +31,7 @@ export default async function getRooms(params: RoomParams) {
       };
     }
 
-    const rooms = await prisma.rooms.findMany({
+    const rooms = await prismadb.rooms.findMany({
       where: query,
       orderBy: { createdAt: "desc" },
     });

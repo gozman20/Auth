@@ -1,13 +1,18 @@
 import React from "react";
-import SettingsClient from "./SettingsClient";
+import SettingsNavbar from "./components/SettingsNavbar";
 
-const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <div>
-      <SettingsClient />
-      {children}
+      <div className="mb-10 ">
+        {" "}
+        <SettingsNavbar />
+      </div>
+      <div>{children}</div>
     </div>
   );
-};
-
-export default SettingsLayout;
+}

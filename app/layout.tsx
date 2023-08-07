@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 import ToastProvider from "@/toastProvider/ToastProvider";
 import RegisterModal from "@/components/modals/RegisterModal";
 import LoginModal from "@/components/modals/LoginModal";
-import AdminModal from "@/components/modals/AdminModal";
+import AdminModal from "./settings/(routes)/rooms/[roomId]/components/AdminModal";
 import ClientOnly from "@/components/ClientOnly";
 import styles from "@/components/styles";
 

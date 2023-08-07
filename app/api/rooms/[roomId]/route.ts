@@ -6,7 +6,7 @@ interface Params {
 export async function DELETE(req: Request, { params }: { params: Params }) {
   try {
     const { roomId } = params;
-    const room = await prisma.rooms.deleteMany({
+    const room = await prisma.room.deleteMany({
       where: {
         id: roomId,
       },
@@ -20,7 +20,7 @@ export async function PATCH(req: Request, { params }: { params: Params }) {
   try {
     const { roomId } = params;
     const { image, description, name } = await req.json();
-    const room = await prisma.rooms.update({
+    const room = await prisma.room.update({
       where: {
         id: roomId,
       },

@@ -74,7 +74,7 @@ const Navbar: React.FC<NavProps> = ({ currentUser }) => {
               </div>
               <div
                 className="hover:border-b hover:border-bb cursor-pointer"
-                onClick={() => router.push("/settings/bookings")}
+                onClick={() => router.push("/settings")}
               >
                 SETTINGS
               </div>

@@ -11,49 +11,36 @@ datasource db {
 }
 
 
+enum Role{
+  USER
+  ADMIN
+}
+
 model User {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
   name            String?
   email           String   @unique
-  image           String?
+  images           String?
+  role   Role? @default(USER)
   hashedPassword  String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   favoriteIds     String[] @db.ObjectId
-  // accounts Account[]
-  // rooms Rooms[]
   reservations Reservation[]
 }
 
-// model Account {
-//   id String @id @default(auto()) @map("_id") @db.ObjectId
-//   userId             String   @db.ObjectId
-//   type               String
-//   provider           String
-//   providerAccountId  String
-//   refresh_token      String?  @db.String
-//   access_token       String?  @db.String
-//   expires_at         Int?
-//   token_type         String?
-//   scope              String?
-//   id_token           String?  @db.String
-//   session_state      String?
-//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-//   @@unique([provider, providerAccountId])
-// }
-
-model Rooms {
+model Room {
   id             String @id @default(auto()) @map("_id") @db.ObjectId
   title String
   description String
-  image String
-  guestCount Int
-  bathroomCount Int
-  price Int
-  // adminId String @db.ObjectId 
+  guestCount String
+  bathroomCount String
+  price String
+  images Image[]
   createdAt DateTime @default(now())
-  // user User @relation(fields: [adminId], references: [id], onDelete: Cascade)
- rooms Reservation[]
+  updatedAt DateTime @updatedAt
+  reservation Reservation[]
+  
 }
 
 model Reservation {
@@ -68,6 +55,15 @@ model Reservation {
   endDate DateTime
   totalPrice Int
   createdAt DateTime @default(now())
-  user User? @relation(fields: [loggedinuserId], references: [id], onDelete: Cascade)
-  rooms  Rooms @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user User? @relation(fields: [loggedinuserId], references: [id])
+  rooms  Room @relation(fields: [roomId], references: [id])
+}
+
+model Image{
+id  String @id @default(auto()) @map("_id") @db.ObjectId
+url String
+roomId String @db.ObjectId
+room Room @relation(fields: [roomId],references: [id])
+createdAt   DateTime @default(now())
+ updatedAt   DateTime @updatedAt
 }

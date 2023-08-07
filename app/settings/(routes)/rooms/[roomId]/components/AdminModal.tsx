@@ -3,14 +3,15 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import useAdminModal from "@/hooks/useAdminModal";
-import Modal from "./Modal";
-import Counter from "../inputs/Counter";
-import ImageUpload from "../inputs/ImageUpload";
-import Input from "../inputs/Input";
-import Heading from "../Heading";
+import Modal from "@/components/modals/Modal";
+import Counter from "@/components/inputs/Counter";
+import ImageUpload from "@/components/inputs/ImageUpload";
+import Input from "@/components/inputs/Input";
+import Heading from "@/components/Heading";
+import { SafeRoom } from "@/types";
 
 enum STEPS {
   CATEGORY = 0,
@@ -19,10 +20,14 @@ enum STEPS {
   PRICE = 3,
 }
 
-const AdminModal = () => {
+interface AdminModalProps {
+  room?: SafeRoom | null;
+}
+const AdminModal: React.FC<AdminModalProps> = ({ room }) => {
   const router = useRouter();
   const adminModal = useAdminModal();
   const [step, setStep] = useState(STEPS.CATEGORY);
+
   const {
     register,
     handleSubmit,
@@ -31,7 +36,7 @@ const AdminModal = () => {
     formState: { errors, isSubmitting },
     reset,
   } = useForm<FieldValues>({
-    defaultValues: {
+    defaultValues: room || {
       title: "",
       guestCount: 1,
       bathroomCount: 1,
@@ -41,6 +46,9 @@ const AdminModal = () => {
     },
   });
 
+  useEffect(() => {
+    adminModal.onOpen();
+  }, []);
   const guestCount = watch("guestCount");
   const bathroomCount = watch("bathroomCount");
   const image = watch("image");
@@ -84,6 +92,7 @@ const AdminModal = () => {
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.PRICE) {
+      if (room) return "Update";
       return "Create";
     }
 

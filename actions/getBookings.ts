@@ -1,4 +1,4 @@
-import prisma from "@/libs/prismadb";
+import prismadb from "@/libs/prismadb";
 
 interface Iparams {
   roomId?: string;
@@ -11,7 +11,7 @@ export default async function getBookings(params: Iparams) {
       query.roomId = roomId;
     }
 
-    const bookings = await prisma.reservation.findMany({
+    const bookings = await prismadb.reservation.findMany({
       where: query,
       include: { rooms: true },
       orderBy: { createdAt: "desc" },

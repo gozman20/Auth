@@ -6,6 +6,7 @@ import { RoomParams } from "@/actions/getRooms";
 import ClientOnly from "@/components/ClientOnly";
 
 import PageSetUp from "./PageSetUp";
+import prismadb from "@/libs/prismadb";
 
 export const dynamic = "force-dynamic";
 
@@ -13,8 +14,9 @@ interface Homeprops {
   searchParams: RoomParams;
 }
 const Home = async ({ searchParams }: Homeprops) => {
-  const rooms = await getRooms(searchParams);
-
+  // const rooms = await getRooms(searchParams);
+  const rooms = await prismadb.rooms.findMany();
+  console.log(rooms);
   if (rooms.length === 0)
     return (
       <ClientOnly>

@@ -4,17 +4,27 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { title, description, price, guestCount, image, bathroomCount } =
+    const { title, description, price, guestCount, images, bathroomCount } =
       body;
     console.log("hi");
-    const room = await prisma.rooms.create({
+
+    if (!images || !images.length) {
+      return new NextResponse("Images are required", { status: 400 });
+    }
+
+    const room = await prisma.room.create({
       data: {
         title,
         description,
-        image,
+
         bathroomCount,
-        guestCount: parseInt(guestCount, 10),
-        price: parseInt(price, 10),
+        guestCount,
+        price,
+        images: {
+          createMany: {
+            data: [...images.map((image: { url: string }) => image)],
+          },
+        },
       },
     });
     return NextResponse.json(room);
@@ -22,3 +32,5 @@ export async function POST(req: Request) {
     throw new Error();
   }
 }
+
+export async function GET() {}

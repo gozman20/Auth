@@ -1,11 +1,10 @@
 import React from "react";
 import getRooms from "@/actions/getRooms";
 import { RoomParams } from "@/actions/getRooms";
-import PropertyClient from "./PropertyClient";
-import styles from "@/components/styles";
 import ClientOnly from "@/components/ClientOnly";
 import Heading from "@/components/Heading";
 import { Button } from "@/components/ui/button";
+import PropertyClient from "./components/RoomsClient";
 
 export const dynamic = "force-dynamic";
 
@@ -21,7 +20,7 @@ const Properties = async ({ searchParams }: Homeprops) => {
       </ClientOnly>
     );
 
-  const formattedRoom = rooms.map((item) => ({
+  const formattedRoom = rooms.map((item: any) => ({
     id: item.id,
     name: item.title,
     description: item.description,

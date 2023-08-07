@@ -17,9 +17,9 @@ const BookingClient: React.FC<BookingClientprops> = ({ reservations = [] }) => {
   const router = useRouter();
 
   return (
-    <>
+    <div className="">
       <DataTable columns={columns} data={reservations} />
-    </>
+    </div>
   );
 };
 
