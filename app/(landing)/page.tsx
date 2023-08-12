@@ -15,7 +15,7 @@ interface Homeprops {
 }
 const Home = async ({ searchParams }: Homeprops) => {
   // const rooms = await getRooms(searchParams);
-  const rooms = await prismadb.rooms.findMany();
+  const rooms = await prismadb.room.findMany();
   console.log(rooms);
   if (rooms.length === 0)
     return (

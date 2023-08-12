@@ -1,5 +1,5 @@
 import React from "react";
-import getBookings from "@/actions/getBookings";
+import getBookings from "@/actions/getReservations";
 import BookingClient from "./BookingClient";
 import { BookingColumn } from "@/components/column";
 import format from "date-fns/format";

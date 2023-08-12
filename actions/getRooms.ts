@@ -31,8 +31,11 @@ export default async function getRooms(params: RoomParams) {
       };
     }
 
-    const rooms = await prismadb.rooms.findMany({
+    const rooms = await prismadb.room.findMany({
       where: query,
+      include: {
+        images: true,
+      },
       orderBy: { createdAt: "desc" },
     });
 

@@ -2,12 +2,12 @@
 import ClientOnly from "@/components/ClientOnly";
 import Heading from "@/components/Heading";
 import { SafeRoom } from "@/types";
-import { Rooms } from "@prisma/client";
+import { Room } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 interface PageSerUpProps {
-  rooms: Rooms[];
+  rooms: Room[];
 }
 const PageSetUp: React.FC<PageSerUpProps> = ({ rooms }) => {
   const router = useRouter();

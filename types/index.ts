@@ -1,11 +1,11 @@
-import { User, Rooms, Reservation } from "@prisma/client";
+import { User, Room, Reservation, Image } from "@prisma/client";
 
 export type SafeUser = Omit<User, "createdAt" | "updatedAt"> & {
   createdAt: string;
   updatedAt: string;
 };
 
-export type SafeRoom = Omit<Rooms, "createdAt"> & { createdAt: string };
+export type SafeRoom = Omit<Room, "createdAt"> & { createdAt: string };
 
 export type SafeReservation = Omit<
   Reservation,
@@ -16,3 +16,10 @@ export type SafeReservation = Omit<
   endDate: string;
   rooms: SafeRoom;
 };
+export interface Image {
+  id: string;
+  url: string;
+  roomId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}

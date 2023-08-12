@@ -3,7 +3,7 @@ import prismadb from "@/libs/prismadb";
 interface Iparams {
   roomId?: string;
 }
-export default async function getBookings(params: Iparams) {
+export default async function getReservations(params: Iparams) {
   try {
     const { roomId } = params;
     const query: any = {};

@@ -11,19 +11,11 @@ import {
 import RoomReservation from "@/components/rooms/RoomReservation";
 import ReservationModal from "@/components/modals/ReservationModal";
 import { SafeReservation } from "@/types";
+import { RoomType } from "../../page";
+import Gallery from "./Gallery";
 
-interface RoomDetailProps {
-  id: string;
-  title: string;
-  image: string;
-  guestCount: number;
-  price: number;
-  bathroomCount: number;
-  description: string;
-  createdAt: string;
-}
 interface Room {
-  room: RoomDetailProps;
+  room: RoomType;
   reservations?: SafeReservation[];
 }
 
@@ -36,7 +28,7 @@ const initialDateRange = {
 const RoomDetail: React.FC<Room> = ({ room, reservations = [] }) => {
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
 
-  const [totalPrice, setTotalPrice] = useState(room.price);
+  const [totalPrice, setTotalPrice] = useState(Number(room.price));
   //Disable the dates of the previous reservation made on this room
   const disabledDates = useMemo(() => {
     let dates: Date[] = [];
@@ -61,31 +53,30 @@ const RoomDetail: React.FC<Room> = ({ room, reservations = [] }) => {
       );
 
       if (dayCount && room.price) {
-        setTotalPrice(dayCount * room.price);
+        setTotalPrice(dayCount * +room.price);
         return;
       }
     }
 
-    setTotalPrice(room.price);
+    setTotalPrice(+room.price);
   }, [dateRange, room.price, totalPrice]);
 
   return (
-    <div className={`${styles.paddingX}`}>
+    <div>
       <ReservationModal
         dateRange={dateRange}
         totalPrice={totalPrice}
         roomId={room.id}
       />
-      <div className="relative aspect-square w-full h-[60vh]">
-        <Image src={room.image} alt="room" fill />
-      </div>
+      <Gallery images={room.images} />
+
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <RoomReservation
-          totalNight={totalPrice / room.price}
+          totalNight={totalPrice / +room.price}
           dateRange={dateRange}
           onChangeDate={setDateRange}
           totalPrice={totalPrice}
-          price={room.price}
+          price={+room.price}
           disabledDates={disabledDates}
         />
 

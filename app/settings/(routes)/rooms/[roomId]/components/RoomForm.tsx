@@ -69,7 +69,7 @@ const RoomForm: React.FC<RoomFormProps> = ({ initialData }) => {
         await axios.post(`/api/rooms`, data);
       }
       router.refresh();
-      router.push(`/products`);
+      router.push(`/settings/rooms`);
       toast.success(toastMessage);
     } catch (error: any) {
       toast.error("Something went wrong.");

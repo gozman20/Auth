@@ -9,7 +9,7 @@ export type RoomsColumn = {
   id: string;
   name: string;
   description: string;
-  guest: number;
+  guest: string;
 };
 
 export const roomcolumns: ColumnDef<RoomsColumn>[] = [

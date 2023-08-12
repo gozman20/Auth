@@ -7,7 +7,7 @@ export default async function getRoomById(params: Iparams) {
   try {
     const { roomId } = params;
 
-    const room = await prismadb.rooms.findUnique({
+    const room = await prismadb.room.findUnique({
       where: {
         id: roomId,
       },
@@ -15,8 +15,7 @@ export default async function getRoomById(params: Iparams) {
         images: true,
       },
     });
-    console.log(room);
-    console.log("Hello");
+
     if (!room) return null;
     return room;
     // return {
