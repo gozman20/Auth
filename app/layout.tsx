@@ -9,6 +9,7 @@ import AdminModal from "./settings/(routes)/rooms/[roomId]/components/AdminModal
 import ClientOnly from "@/components/ClientOnly";
 import styles from "@/components/styles";
 import ModalProvider from "@/providers/ModalProvider";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem> */}
         <ClientOnly>
           <Navbar currentUser={currentUser} />
           <ModalProvider />
@@ -36,6 +38,7 @@ export default async function RootLayout({
           <ToastProvider />
         </ClientOnly>
         <div className={`pb-20 pt-28 ${styles.paddingX}`}>{children}</div>
+        {/* </ThemeProvider> */}
       </body>
     </html>
   );

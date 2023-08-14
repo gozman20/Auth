@@ -12,6 +12,7 @@ import { SafeUser } from "@/types";
 import useAdminModal from "@/hooks/useAdminModal";
 import MobileFilters from "./MobileMenu";
 import MobileMenu from "./MobileMenu";
+import { ModeToggle } from "../ModeToggle";
 
 interface NavProps {
   currentUser: SafeUser | null;
@@ -33,27 +34,26 @@ const Navbar: React.FC<NavProps> = ({ currentUser }) => {
   return (
     <header
       className={`${
-        header ? "bg-bb py-2" : "bg-white py-3  border-b border-main"
-      } fixed z-2 w-full  border-b-[2px] border-b-bb transition-all duration-500 ${
+        header ? "border-bb py-2" : "bg-whit py-3  border-b border-main"
+      } fixed z-2 w-full  border-b-[2px] border-whit transition-all duration-500 ${
         styles.paddingX
       }`}
     >
       <div className="flex flex-row justify-between items-center ">
         <div
-          className={`${header ? "text-white" : ""}
-         text-[20px] md:text-[30px] font-semibold
-         flex flex-row justify-center
-          items-center gap-x-3 `}
           onClick={() => router.push("/")}
+          className="mr-auto flex items-center gap-x-3 text-[20px]"
         >
+          {" "}
           <ImLocation2 className=" " />
           Hotel
         </div>
+
         <nav
-          className={`  lg:flex lg:flex-row lg:items-center  lg:gap-x-3 text-[14px] hidden ${
-            header ? "text-white" : "text-black "
-          }`}
+          className={` 
+           lg:flex lg:flex-row lg:items-center  lg:gap-x-3 text-[14px] hidden `}
         >
+          {/* <ModeToggle /> */}
           <div
             className="hover:border-b hover:border-bb cursor-pointer"
             onClick={() => router.push("/")}

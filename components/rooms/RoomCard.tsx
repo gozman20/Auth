@@ -72,7 +72,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
 
       {/*  */}
       {/* </div> */}
-      <div className="bg-white p-2 ">
+      <div className=" p-2 ">
         <div className="my-1 font-semibold text-[16px]">{room.title}</div>
         <div className="flex flex-row items-center gap-3">
           <div className="flex flex-row gap-2  items-center">
