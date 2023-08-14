@@ -8,6 +8,7 @@ import LoginModal from "@/components/modals/LoginModal";
 import AdminModal from "./settings/(routes)/rooms/[roomId]/components/AdminModal";
 import ClientOnly from "@/components/ClientOnly";
 import styles from "@/components/styles";
+import ModalProvider from "@/providers/ModalProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,9 +29,10 @@ export default async function RootLayout({
       <body className={inter.className}>
         <ClientOnly>
           <Navbar currentUser={currentUser} />
+          <ModalProvider />
           <RegisterModal />
           <LoginModal />
-          <AdminModal />
+          {/* <AdminModal /> */}
           <ToastProvider />
         </ClientOnly>
         <div className={`pb-20 pt-28 ${styles.paddingX}`}>{children}</div>

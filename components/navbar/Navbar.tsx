@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/types";
 import useAdminModal from "@/hooks/useAdminModal";
+import MobileFilters from "./MobileMenu";
+import MobileMenu from "./MobileMenu";
 
 interface NavProps {
   currentUser: SafeUser | null;
@@ -32,14 +34,14 @@ const Navbar: React.FC<NavProps> = ({ currentUser }) => {
     <header
       className={`${
         header ? "bg-bb py-2" : "bg-white py-3  border-b border-main"
-      } fixed z-50 w-full  border-b-[2px] border-b-bb transition-all duration-500 ${
+      } fixed z-2 w-full  border-b-[2px] border-b-bb transition-all duration-500 ${
         styles.paddingX
       }`}
     >
       <div className="flex flex-row justify-between items-center ">
         <div
           className={`${header ? "text-white" : ""}
-         text-[25px] md:text-[40px] 
+         text-[20px] md:text-[30px] font-semibold
          flex flex-row justify-center
           items-center gap-x-3 `}
           onClick={() => router.push("/")}
@@ -48,8 +50,8 @@ const Navbar: React.FC<NavProps> = ({ currentUser }) => {
           Hotel
         </div>
         <nav
-          className={`md:flex flex-row items-center  gap-x-3 text-[14px] hidden ${
-            header ? "text-white" : "text-bb "
+          className={`  lg:flex lg:flex-row lg:items-center  lg:gap-x-3 text-[14px] hidden ${
+            header ? "text-white" : "text-black "
           }`}
         >
           <div
@@ -104,15 +106,9 @@ const Navbar: React.FC<NavProps> = ({ currentUser }) => {
             </>
           )}
 
-          <div className=""></div>
+          <div className=""> </div>
         </nav>
-        <div
-          className={`md:hidden text-[25px] ${
-            header ? "text-dark/70" : "text-white"
-          }`}
-        >
-          <GiHamburgerMenu />
-        </div>
+        <MobileMenu />
       </div>
     </header>
   );

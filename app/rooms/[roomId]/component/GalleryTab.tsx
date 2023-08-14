@@ -11,7 +11,7 @@ const GalleryTab: React.FC<GalleryTabProps> = ({ image }) => {
   return (
     <Tab
       className="relative flex 
-    aspect-square h-[50px] md:h-[80px] lg:h-[100px] 
+    aspect-square h-[50px] md:h-[80px] lg:h-[50px] 
     cursor-pointer items-center 
     justify-center rounded-md bg-white"
     >

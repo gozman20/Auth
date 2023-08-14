@@ -68,7 +68,10 @@ const RoomDetail: React.FC<Room> = ({ room, reservations = [] }) => {
         totalPrice={totalPrice}
         roomId={room.id}
       />
-      <Gallery images={room.images} />
+
+      <div className="lg:grid lg:grid-cols-1 lg:items-start lg:gap-x-8">
+        <Gallery images={room.images} />
+      </div>
 
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <RoomReservation

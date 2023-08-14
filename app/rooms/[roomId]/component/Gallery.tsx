@@ -6,12 +6,14 @@ import { Tab } from "@headlessui/react";
 import { Image } from "@/types";
 
 import GalleryTab from "./GalleryTab";
+import { usePathname } from "next/navigation";
 
 interface GalleryProps {
   images: Image[];
 }
 
 const Gallery: React.FC<GalleryProps> = ({ images = [] }) => {
+  const pathname = usePathname();
   return (
     <Tab.Group as="div" className="flex flex-col-reverse">
       <div className="mx-auto mt-3 ">
@@ -24,7 +26,7 @@ const Gallery: React.FC<GalleryProps> = ({ images = [] }) => {
       <Tab.Panels>
         {images.map((image) => (
           <Tab.Panel key={image.id}>
-            <div className="aspect-square relative h-[500px] w-full sm:rounded-lg overflow-hidden">
+            <div className="aspect-[4/3] relative h-full w-full sm:rounded-lg overflow-hidden">
               <NextImage
                 fill
                 src={image.url}

@@ -2,12 +2,16 @@
 import { SafeReservation, SafeRoom } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useCallback } from "react";
+import React, { MouseEventHandler, useCallback } from "react";
 import { IconType } from "react-icons";
 import { GoPeople } from "react-icons/go";
 import { MdOutlineBathroom } from "react-icons/md";
 import Button from "../Button";
 import { RoomType } from "@/app/rooms/page";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { GiExpand } from "react-icons/gi";
+import usePreviewModal from "@/hooks/usePreviewModal";
+import IconButton from "../IconButton";
 
 interface RoomCardProps {
   room: RoomType;
@@ -27,7 +31,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
   disabled,
 }) => {
   const router = useRouter();
-
+  const previewModal = usePreviewModal();
   const handleCancel = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
@@ -39,13 +43,19 @@ const RoomCard: React.FC<RoomCardProps> = ({
     [disabled, onAction, actionId]
   );
 
+  const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.stopPropagation();
+
+    previewModal.onOpen(room);
+  };
+
   return (
     <div
       onClick={() => router.push(`/rooms/${room.id}`)}
-      className={`flex flex-col col-span-1 cursor-pointer `}
+      className={`flex flex-col col-span-1 cursor-pointer  group `}
     >
       <div
-        className="aspect-square 
+        className="aspect-[4/3] 
             w-full 
             relative 
             overflow-hidden 
@@ -53,6 +63,11 @@ const RoomCard: React.FC<RoomCardProps> = ({
             "
       >
         <Image src={room.images?.[0].url} alt="room" fill />
+        <div className="opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5">
+          <div className="flex justify-center items-center">
+            <IconButton onClick={onPreview} icon={<GiExpand />} />
+          </div>
+        </div>
       </div>
 
       {/*  */}
@@ -63,7 +78,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
           <div className="flex flex-row gap-2  items-center">
             <div>
               {" "}
-              <GoPeople size={25} />
+              <IconButton icon={<GoPeople />} />
             </div>
 
             <div className="text-sm">Guest {room.guestCount}</div>
@@ -71,7 +86,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
           <div className="flex flex-row gap-2  items-center">
             <div>
               {" "}
-              <MdOutlineBathroom size={25} />
+              <IconButton icon={<MdOutlineBathroom />} />
             </div>
 
             <div className="text-sm">{room.bathroomCount} Bathroom</div>
